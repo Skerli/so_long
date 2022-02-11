@@ -6,7 +6,16 @@ t_vars may_moove(t_vars v, int x, int y)
 	if (v.map[v.p_i + y][v.p_j + x] == '1')
 		v.may = 0;
 	if (v.map[v.p_i + y][v.p_j + x] == 'C')
-		v.c_size--;
+	{
+		v.map[v.p_i][v.p_j] = '0')
+		v.map[v.p_i + y][v.p_j + x] = 'P')
+		v.c_size--;	
+	}
+	if (v.may == 1)
+	{
+		v.p_i + y;
+		v.p_j + x;
+	}
 	return (v);
 }
 
