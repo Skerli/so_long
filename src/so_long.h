@@ -44,6 +44,7 @@ typedef struct s_vars {
 	int		j;
 	int		x;
 	int		y;
+	int		c_size;
 	char	**map;
 
 }				t_vars;
