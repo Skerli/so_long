@@ -2,7 +2,12 @@
 
 t_vars may_moove(t_vars v, int x, int y)
 {
-	
+	v.may = 1;
+	if (v.map[v.p_i + y][v.p_j + x] == '1')
+		v.may = 0;
+	if (v.map[v.p_i + y][v.p_j + x] == 'C')
+		v.c_size--;
+	return (v);
 }
 
 t_vars where_moove(t_vars v, int keycode)
@@ -23,6 +28,8 @@ t_vars where_moove(t_vars v, int keycode)
 	v = may_moove(v, x, y);
 	if (v.may == 1)
 	{
-		
+		v.p_i += y;
+		v.p_j += x;
 	}
+	return (v);
 }
