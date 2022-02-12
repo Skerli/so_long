@@ -6,7 +6,7 @@
 /*   By: cskipjac <cskipjac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 18:13:22 by cskipjac          #+#    #+#             */
-/*   Updated: 2022/02/12 15:36:26 by cskipjac         ###   ########.fr       */
+/*   Updated: 2022/02/12 18:05:56 by cskipjac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ typedef struct s_vars {
 	int		y;
 	int		may;
 	int		c_size;
+	int		p_size;
+	int		e_size;
+	int		space;
 	char	**map;
 
 }				t_vars;
