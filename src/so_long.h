@@ -6,7 +6,7 @@
 /*   By: cskipjac <cskipjac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 18:13:22 by cskipjac          #+#    #+#             */
-/*   Updated: 2022/02/10 19:59:31 by cskipjac         ###   ########.fr       */
+/*   Updated: 2022/02/12 15:36:26 by cskipjac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-/*typedef struct s_img {
-
-	void	wall;
-	void	player;
-	void	emty;
-
-}				t_img;*/
-
 typedef struct s_vars {
-	//t_img	img;
 	void	*mlx;
 	void	*win;
 	void	*wall;
@@ -40,6 +31,8 @@ typedef struct s_vars {
 	int		map_j;
 	int		p_i;
 	int		p_j;
+	int		e_i;
+	int		e_j;
 	int		i;
 	int		j;
 	int		x;
@@ -53,4 +46,7 @@ typedef struct s_vars {
 t_vars	search(t_vars v, char c);
 void	juu(char **arr);
 
+//
+t_vars	may_moove(t_vars v, int x, int y);
+t_vars	where_moove(t_vars v, int keycode);
 #endif

@@ -6,7 +6,7 @@
 /*   By: cskipjac <cskipjac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 19:52:40 by cskipjac          #+#    #+#             */
-/*   Updated: 2022/02/10 20:05:26 by cskipjac         ###   ########.fr       */
+/*   Updated: 2022/02/12 15:43:16 by cskipjac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@ int	bind(int keycode, t_vars *vars)
 		mlx_destroy_window(vars->mlx, vars->win);
 	if (keycode == 53)
 		exit(0);
-	if (keycode == 13) //W
+	*vars = where_moove(*vars, keycode);
+	if (vars->may == 1)
+	{
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->player,
+			((vars->p_j * 64) + 64), ((vars->p_i * 64) + 64));
+	}
+	/*if (keycode == 13) //W
 	{
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->emty, vars->x, vars->y);
 		vars->y -= 64;
@@ -41,7 +47,7 @@ int	bind(int keycode, t_vars *vars)
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->emty, vars->x, vars->y);
 		vars->x += 64;
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->player, vars->x, vars->y);
-	}
+	}*/
 	return (0);
 }
 
@@ -54,6 +60,7 @@ t_vars	len_map(char *map, t_vars vars)
 	vars.map_i = 0;
 	vars.map_j = 0;
 	k = 0;
+	vars.c_size = 0;
 	fd = open(map, O_RDONLY);
 	if (fd == -1)
 	{
@@ -65,40 +72,42 @@ t_vars	len_map(char *map, t_vars vars)
 		if (c == '\n')
 			vars.map_i++;
 		if (c == '\n')
-			k++;
+			k = 1;
 		if (k == 0)
 			vars.map_j++;
+		if (c == 'C')
+			vars.c_size++;
 	}
 	close(fd);
 	return (vars);
 }
 
-char	**read_map(char *map, t_vars vars)
+t_vars	read_map(char *map, t_vars vars)
 {
-	char	**arr;
 	char	c;
 	int		i;
 	int		j;
 	int		fd;
 
 	vars = len_map(map, vars);
+	//printf("|i = %d|\t", vars.c_size);
 	//printf("|i = %d|\t", vars.map_i);
 	//printf("|j = %d|\t", vars.map_i);
-	arr = (char **)malloc(sizeof(char *) * (vars.map_i + 1));
+	vars.map = (char **)malloc(sizeof(char *) * (vars.map_i + 1));
 	i = -1;
 	fd = open(map, O_RDONLY);
 	while (++i != vars.map_i)
 	{
 		j = -1;
-		arr[i] = (char *)malloc(sizeof(char) * (vars.map_j + 1));
+		vars.map[i] = (char *)malloc(sizeof(char) * (vars.map_j + 1));
 		while (read(fd, &c, 1) != 0 && ++j != vars.map_j)
-			arr[i][j] = c;
-		arr[i][j] = '\0';
+			vars.map[i][j] = c;
+		vars.map[i][j] = '\0';
 		//printf("\n%s", arr[i]);
 	}
-	arr[i] = NULL;
+	vars.map[i] = NULL;
 	close(fd);
-	return (arr);
+	return (vars);
 }
 
 void	maprender_plus(t_vars v)
@@ -155,8 +164,7 @@ void	map_changer(t_vars vars)
 	int		i;
 
 	map = "../maps/map2.ber";
-	vars = sprites(vars);
-	vars.map = read_map(map, vars);
+	vars = read_map(map, vars);
 	maprender(vars);
 	juu(vars.map);
 }
@@ -166,6 +174,7 @@ int	main(void)
 	t_vars	vars;
 
 	vars.mlx = mlx_init();
+	vars = sprites(vars);
 	map_changer(vars);
 }
-//gcc  -Lminilibx -lmlx -framework OpenGL -framework AppKit main.c && ./a.out
+//gcc  -Lminilibx -lmlx -framework OpenGL -framework AppKit main.c help.c && ./a.out
