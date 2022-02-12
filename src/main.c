@@ -6,7 +6,7 @@
 /*   By: cskipjac <cskipjac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 19:52:40 by cskipjac          #+#    #+#             */
-/*   Updated: 2022/02/12 15:43:16 by cskipjac         ###   ########.fr       */
+/*   Updated: 2022/02/12 16:20:16 by cskipjac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,11 @@ int	bind(int keycode, t_vars *vars)
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->player,
 			((vars->p_j * 64) + 64), ((vars->p_i * 64) + 64));
 	}
-	/*if (keycode == 13) //W
+	if (vars->p_i == vars->e_i && vars->p_j == vars->e_j && vars->c_size == 0)
 	{
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->emty, vars->x, vars->y);
-		vars->y -= 64;
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->player, vars->x, vars->y);
+		mlx_destroy_window(vars->mlx, vars->win);
+		exit(0);
 	}
-	if (keycode == 0) //A
-	{
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->emty, vars->x, vars->y);
-		vars->x -= 64;
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->player, vars->x, vars->y);
-	}
-	if (keycode == 1) //S
-	{
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->emty, vars->x, vars->y);
-		vars->y += 64;
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->player, vars->x, vars->y);
-	}
-	if (keycode == 2) //D
-	{
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->emty, vars->x, vars->y);
-		vars->x += 64;
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->player, vars->x, vars->y);
-	}*/
 	return (0);
 }
 
@@ -149,11 +130,14 @@ t_vars	sprites(t_vars v)
 
 void	maprender(t_vars v)
 {
-	v.win = mlx_new_window(v.mlx, 1800, 1500, "My game vesion alpha 0.01b");
+	v.win = mlx_new_window(v.mlx, v.map_j * 128, v.map_i * 128, "MyGame");
 	maprender_plus(v);
 	v = search(v, 'P');
-	v.x = 64 + (v.p_j * 64);
-	v.y = 64 + (v.p_i * 64);
+	v.p_j = v.x;
+	v.p_i = v.y;
+	v = search(v, 'E');
+	v.e_j = v.x;
+	v.e_i = v.y;
 	mlx_key_hook(v.win, bind, &v);
 	mlx_loop(v.mlx);
 }

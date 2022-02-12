@@ -6,7 +6,7 @@
 /*   By: cskipjac <cskipjac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 19:34:16 by cskipjac          #+#    #+#             */
-/*   Updated: 2022/02/12 15:40:06 by cskipjac         ###   ########.fr       */
+/*   Updated: 2022/02/12 16:16:21 by cskipjac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_vars	search(t_vars v, char c)
 		{
 			if (v.map[i][j] == c)
 			{
-				v.p_i = i;
-				v.p_j = j;
+				v.y = i;
+				v.x = j;
 				return (v);
 			}
 			j++;
