@@ -6,7 +6,7 @@
 /*   By: cskipjac <cskipjac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:06 by cskipjac          #+#    #+#             */
-/*   Updated: 2022/02/15 17:34:52 by cskipjac         ###   ########.fr       */
+/*   Updated: 2022/02/15 18:58:45 by cskipjac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_vars	where_moove(t_vars v, int keycode)
 
 int	bind(int keycode, t_vars *vars)
 {
-	if (keycode == 53 || keycode == 17)
+	if (keycode == 53)
 		juu_exit(*vars);
 	*vars = where_moove(*vars, keycode);
 	if (vars->may == 1)
