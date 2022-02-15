@@ -6,7 +6,7 @@
 /*   By: cskipjac <cskipjac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 19:34:16 by cskipjac          #+#    #+#             */
-/*   Updated: 2022/02/12 16:29:09 by cskipjac         ###   ########.fr       */
+/*   Updated: 2022/02/15 18:42:01 by cskipjac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,30 @@ void	juu(char **arr)
 		i++;
 	}
 	free(arr);
+}
+
+void	juu_exit(t_vars vars)
+{
+	juu(vars.map);
+	mlx_destroy_window(vars.mlx, vars.win);
+	mlx_destroy_image(vars.mlx, vars.wall);
+	mlx_destroy_image(vars.mlx, vars.player);
+	mlx_destroy_image(vars.mlx, vars.emty);
+	mlx_destroy_image(vars.mlx, vars.eat);
+	mlx_destroy_image(vars.mlx, vars.door);
+	exit(0);
+}
+
+void	ft_putnbr(int num)
+{
+	if (num >= 10)
+		ft_putnbr(num / 10);
+	num = (num % 10) + 48;
+	write(1, &num, 1);
+}
+
+int	sclose(t_vars *vars)
+{
+	juu_exit(*vars);
+	return (0);
 }

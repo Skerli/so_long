@@ -6,7 +6,7 @@
 /*   By: cskipjac <cskipjac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:06 by cskipjac          #+#    #+#             */
-/*   Updated: 2022/02/12 16:29:45 by cskipjac         ###   ########.fr       */
+/*   Updated: 2022/02/15 17:34:52 by cskipjac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,27 @@ t_vars	where_moove(t_vars v, int keycode)
 		v.p_j += x;
 	}
 	return (v);
+}
+
+int	bind(int keycode, t_vars *vars)
+{
+	if (keycode == 53 || keycode == 17)
+		juu_exit(*vars);
+	*vars = where_moove(*vars, keycode);
+	if (vars->may == 1)
+	{
+		vars->mes = ft_itoa(++vars->count);
+		write(1, "\n", 1);
+		ft_putnbr(vars->count);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->emty,
+			(vars->map_j * 64) + 64, 32);
+		mlx_string_put(vars->mlx, vars->win, (vars->map_j * 64) + 64, 32,
+			0x0012FF3A, vars->mes);
+		free(vars->mes);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->player,
+			((vars->p_j * 64) + 64), ((vars->p_i * 64) + 64));
+	}
+	if (vars->map[vars->p_i][vars->p_j] == 'E' && vars->c_size == 0)
+		juu_exit(*vars);
+	return (0);
 }

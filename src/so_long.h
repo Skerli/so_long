@@ -6,7 +6,7 @@
 /*   By: cskipjac <cskipjac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 18:13:22 by cskipjac          #+#    #+#             */
-/*   Updated: 2022/02/12 18:05:56 by cskipjac         ###   ########.fr       */
+/*   Updated: 2022/02/15 18:42:12 by cskipjac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,28 @@ typedef struct s_vars {
 	int		p_size;
 	int		e_size;
 	int		space;
+	int		count;
 	char	**map;
+	char	*mes;
 
 }				t_vars;
 
 t_vars	search(t_vars v, char c);
 void	juu(char **arr);
-
+void	juu_exit(t_vars vars);
+void	ft_putnbr(int num);
+int		sclose(t_vars *vars);
 //
 t_vars	may_moove(t_vars v, int x, int y);
 t_vars	where_moove(t_vars v, int keycode);
+int		bind(int keycode, t_vars *vars);
+
+//
+t_vars	read_map(char *map, t_vars vars);
+t_vars	len_map_checker(char *map, t_vars vars, int q);
+int		name_checker(char	*name);
+
+//
+char	*ft_itoa(int n);
+
 #endif
