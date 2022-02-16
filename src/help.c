@@ -6,7 +6,7 @@
 /*   By: cskipjac <cskipjac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 19:34:16 by cskipjac          #+#    #+#             */
-/*   Updated: 2022/02/15 18:42:01 by cskipjac         ###   ########.fr       */
+/*   Updated: 2022/02/16 16:25:58 by cskipjac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ void	juu_exit(t_vars vars)
 	mlx_destroy_image(vars.mlx, vars.emty);
 	mlx_destroy_image(vars.mlx, vars.eat);
 	mlx_destroy_image(vars.mlx, vars.door);
+	mlx_destroy_image(vars.mlx, vars.door_open);
+	mlx_destroy_image(vars.mlx, vars.enemy);
+	mlx_destroy_image(vars.mlx, vars.enemy_anime);
+	mlx_destroy_image(vars.mlx, vars.player_anime);
 	exit(0);
 }
 

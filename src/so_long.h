@@ -6,7 +6,7 @@
 /*   By: cskipjac <cskipjac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 18:13:22 by cskipjac          #+#    #+#             */
-/*   Updated: 2022/02/15 18:42:12 by cskipjac         ###   ########.fr       */
+/*   Updated: 2022/02/16 19:05:19 by cskipjac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,16 @@ typedef struct s_vars {
 	void	*door;
 	void	*eat;
 	void	*emty;
+	void	*enemy;
+	void	*enemy_anime;
+	void	*player_anime;
+	void	*door_open;
 	int		map_i;
 	int		map_j;
 	int		p_i;
 	int		p_j;
-	int		e_i;
-	int		e_j;
+	int		enemy_i;
+	int		enemy_j;
 	int		i;
 	int		j;
 	int		x;
@@ -43,9 +47,10 @@ typedef struct s_vars {
 	int		e_size;
 	int		space;
 	int		count;
+	int		where;
+	int		where_player;
 	char	**map;
 	char	*mes;
-
 }				t_vars;
 
 t_vars	search(t_vars v, char c);
@@ -65,5 +70,10 @@ int		name_checker(char	*name);
 
 //
 char	*ft_itoa(int n);
+
+//bonus!
+int		enemy_to_anime(t_vars *v);
+t_vars	find_space_enemy(t_vars v);
+void	paint_ec(t_vars v, int i, int j);
 
 #endif

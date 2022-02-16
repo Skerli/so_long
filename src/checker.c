@@ -6,7 +6,7 @@
 /*   By: cskipjac <cskipjac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 15:37:47 by cskipjac          #+#    #+#             */
-/*   Updated: 2022/02/15 18:20:37 by cskipjac         ###   ########.fr       */
+/*   Updated: 2022/02/16 16:11:22 by cskipjac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_vars	read_map(char *map, t_vars vars)
 	while (++i != vars.map_i)
 	{
 		j = -1;
-		vars.map[i] = (char *)malloc(sizeof(char) * (vars.map_j + 1));
+		vars.map[i] = (char *)malloc(sizeof(char) * (vars.map_j));
 		while (++j != vars.map_j)
 		{
 			read(fd, &c, 1);

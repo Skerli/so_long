@@ -6,7 +6,7 @@
 /*   By: cskipjac <cskipjac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 19:52:40 by cskipjac          #+#    #+#             */
-/*   Updated: 2022/02/15 19:35:38 by cskipjac         ###   ########.fr       */
+/*   Updated: 2022/02/16 18:35:53 by cskipjac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,16 @@ t_vars	sprites(t_vars v)
 
 	v.wall = mlx_xpm_file_to_image(v.mlx, "../sprites/wall.xpm", &w, &h);
 	v.player = mlx_xpm_file_to_image(v.mlx, "../sprites/player.xpm", &w, &h);
+	v.enemy = mlx_xpm_file_to_image(v.mlx, "../sprites/enemy.xpm", &w, &h);
 	v.emty = mlx_xpm_file_to_image(v.mlx, "../sprites/emty.xpm", &w, &h);
 	v.eat = mlx_xpm_file_to_image(v.mlx, "../sprites/eat.xpm", &w, &h);
 	v.door = mlx_xpm_file_to_image(v.mlx, "../sprites/door.xpm", &w, &h);
+	v.enemy_anime = mlx_xpm_file_to_image(v.mlx, "../sprites/enemy_anime.xpm",
+			&w, &h);
+	v.player_anime = mlx_xpm_file_to_image(v.mlx, "../sprites/player_anime.xpm",
+			&w, &h);
+	v.door_open = mlx_xpm_file_to_image(v.mlx, "../sprites/door_open.xpm",
+			&w, &h);
 	return (v);
 }
 
@@ -61,9 +68,13 @@ void	maprender(t_vars v)
 	v = search(v, 'P');
 	v.p_j = v.x;
 	v.p_i = v.y;
+	v = find_space_enemy(v);
 	v.count = 0;
+	v.where = 1;
+	v.where_player = 0;
 	mlx_hook(v.win, 17, 1L << 0, sclose, &v);
 	mlx_key_hook(v.win, bind, &v);
+	mlx_loop_hook(v.mlx, enemy_to_anime, (void *)&v);
 	mlx_loop(v.mlx);
 }
 
@@ -99,4 +110,4 @@ int	main(int ac, char **argv)
 //printf("|i = %d|\t", vars.map_i);
 //printf("|j = %d|\t", vars.map_i);
 //printf("MAY = %d\n", vars.may);
-//gcc  -Lminilibx -lmlx -framework OpenGL -framework AppKit main.c help.c play.c checker.c itoa.c && ./a.out "../maps/map2.ber"
+//gcc -Lminilibx -lmlx -framework OpenGL -framework AppKit main.c help.c play.c checker.c itoa.c enemy_anime_bonus.c help_plus.c && ./a.out "../maps/map2.ber"

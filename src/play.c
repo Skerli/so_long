@@ -6,7 +6,7 @@
 /*   By: cskipjac <cskipjac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:06 by cskipjac          #+#    #+#             */
-/*   Updated: 2022/02/15 18:58:45 by cskipjac         ###   ########.fr       */
+/*   Updated: 2022/02/16 17:55:10 by cskipjac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,8 @@ t_vars	may_moove(t_vars v, int x, int y)
 		v.may = 0;
 	if (v.map[v.p_i + y][v.p_j + x] == 'C')
 	{
-		v.map[v.p_i][v.p_j] = '0';
-		v.map[v.p_i + y][v.p_j + x] = 'P';
+		v.map[v.p_i + y][v.p_j + x] = '0';
 		v.c_size--;
-	}
-	if (v.may == 1 && v.map[v.p_i][v.p_j] == 'E')
-	{
-		v.map[v.p_i + y][v.p_j + x] = 'P';
 	}
 	return (v);
 }
@@ -66,7 +61,7 @@ int	bind(int keycode, t_vars *vars)
 	*vars = where_moove(*vars, keycode);
 	if (vars->may == 1)
 	{
-		vars->mes = ft_itoa(++vars->count);
+		vars->mes = ft_itoa(++(vars->count));
 		write(1, "\n", 1);
 		ft_putnbr(vars->count);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->emty,
